@@ -61,7 +61,7 @@ const AccountWrap = ({
 };
 
 const Wrapper = styled.div`
-  font-family: 'SUITE-Regular';
+  font-family: 'TossFaceFontMac';
   padding: 10px 0;
   border-bottom: 1px solid #dfdfdf;
   &:last-of-type {
@@ -83,7 +83,7 @@ const Relation = styled.span`
   color: #44484d;
 `;
 const Name = styled.span`
-  font-size: 1rem
+  font-size: 1rem;
 `;
 
 const Details = styled.div`

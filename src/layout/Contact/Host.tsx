@@ -20,16 +20,18 @@ export default Host;
 const HostInfo = ({ person }: { person: BrideAndGroom }) => {
   return (
     <HostDetails>
-      {person.parents && (
-        <>
-          {person.parents.map((parent, index) => (
-            <React.Fragment key={index}>
-              {index > 0 && ' · '}
-              {parent.name}
-            </React.Fragment>
-          ))}
-        </>
-      )}
+      <HighlightedName>
+        {person.parents && (
+          <>
+            {person.parents.map((parent, index) => (
+              <React.Fragment key={index}>
+                {index > 0 && ' · '}
+                {parent.name}
+              </React.Fragment>
+            ))}
+          </>
+        )}
+      </HighlightedName>
       <RelationText>
         <div>의</div>
         <Relation>{person.relation}</Relation>
@@ -41,14 +43,13 @@ const HostInfo = ({ person }: { person: BrideAndGroom }) => {
 
 const HighlightedName = styled.span`
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #4f4f4f;
-  margin-right: 5px;
 `;
 
 const HostContainer = styled.div`
   gap: 8px;
-  font-family: HSSanTokki20-Regular, serif;
+  font-family: TossFaceFontMac, serif;
 `;
 
 const HostDetails = styled.div`
@@ -59,7 +60,7 @@ const HostDetails = styled.div`
   gap: 6px;
   text-align: center;
   align-items: center;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 const RelationText = styled.div`
