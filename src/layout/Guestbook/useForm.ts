@@ -22,10 +22,16 @@ function useForm<T>({ initialValues, onSubmit, validate }: useFormProps<T>) {
     setErrors(validate(values));
   };
 
+  const clear = () => {
+    setValues(initialValues);
+    console.log(initialValues);
+  };
+
   useEffect(() => {
     if (isLoading) {
       if (Object.keys(errors).length === 0) {
         onSubmit(values);
+        clear();
       }
       setIsLoading(false);
     }
@@ -37,6 +43,7 @@ function useForm<T>({ initialValues, onSubmit, validate }: useFormProps<T>) {
     isLoading,
     handleChange,
     handleSubmit,
+    clear,
   };
 }
 

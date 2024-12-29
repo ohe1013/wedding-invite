@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { realtimeDb } from 'firebase';
+import { limitToFirst, onValue, orderByChild, query, ref } from 'firebase/database';
 
 import AllPostsModal from './AllPostsModal';
 import PostFormModal from './PostFormModal';
 import SimplePostCard from './SimplePostCard';
 import { GuestBookPost, GuestBookPostForm } from './type';
 import Button from '@/components/Button';
-import { useFetchPosts } from './useGuestBook';
-import { onValue, ref } from 'firebase/database';
-import { realtimeDb } from 'firebase';
 
 // 스타일 정의
 const Section = styled.div`
   width: 100%;
   display: flex;
-  overflow-x: auto;
+  // overflow-x: auto;
 `;
 const PostsContainer = styled.div`
   max-width: 100vw;
@@ -87,7 +86,6 @@ function GuestBook() {
   const [isPostsModalOpen, setIsPostsModalOpen] = useState<boolean>(false);
   const [posts, setPosts] = useState<GuestBookPost[]>([]);
 
-  const { data, isLoading } = useFetchPosts();
   const handleFormModalOpen = () => {
     setIsFormModalOpen(true);
   };
@@ -110,12 +108,26 @@ function GuestBook() {
   }
   useEffect(() => {
     const guestBookRef = ref(realtimeDb, 'guestbook');
-
-    onValue(guestBookRef, (snapshot) => {
-      console.log(Object.entries(snapshot.val() as GuestBookPost[]).map((item) => item[1]));
-      setPosts(Object.entries(snapshot.val() as GuestBookPost[]).map((item) => item[1]));
+    const q = query(guestBookRef, orderByChild('timestamp'), limitToFirst(7));
+    onValue(q, (snapshot) => {
+      if (snapshot.exists()) {
+        setPosts(Object.entries(snapshot.val() as GuestBookPost[]).map((item) => item[1]));
+      } else {
+        setPosts([]);
+      }
     });
   }, []);
+
+  useEffect(() => {
+    if (isFormModalOpen || isPostsModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isFormModalOpen, isPostsModalOpen]);
 
   return (
     <Section>
@@ -138,7 +150,7 @@ function GuestBook() {
           )}
           <ButtonWrapper>
             <Button onClick={handleFormModalOpen}>새 글 작성</Button>
-            <Button onClick={handleFormModalOpen}>전체보기</Button>
+            <Button onClick={handleAllPostsModalOpen}>전체보기</Button>
           </ButtonWrapper>
         </div>
       </Container>
@@ -147,7 +159,9 @@ function GuestBook() {
         onClose={handleFormModalClose}
         onFormValid={postValidation}
       />
-      <AllPostsModal isOpen={isPostsModalOpen} onClose={handleAllPostsModalClose} />
+      {isPostsModalOpen && (
+        <AllPostsModal isOpen={isPostsModalOpen} onClose={handleAllPostsModalClose} />
+      )}
     </Section>
   );
 }

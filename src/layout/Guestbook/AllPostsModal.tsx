@@ -1,6 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { realtimeDb } from 'firebase';
+import { onValue, ref } from 'firebase/database';
+import { GuestBookPostForm } from './type';
+import { useRemovePost } from './useGuestBook';
+import { Heading1 } from '@/components/Text';
 
 const ModalWrapper = styled.div`
   display: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? 'flex' : 'none')};
@@ -40,11 +45,39 @@ interface AllPostsModalProps {
 }
 
 const AllPostsModal: React.FC<AllPostsModalProps> = ({ isOpen, onClose }) => {
+  const [posts, setPosts] = useState<GuestBookPostForm[]>([]);
+  useEffect(() => {
+    const guestBookRef = ref(realtimeDb, 'guestbook');
+
+    onValue(guestBookRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setPosts(
+          Object.entries(snapshot.val() as GuestBookPostForm[]).map((item) => ({
+            id: item[0],
+            ...item[1],
+          })),
+        );
+      } else {
+        setPosts([]);
+      }
+    });
+  }, []);
+
+  const remove = useRemovePost();
+
   return (
     <ModalWrapper isOpen={isOpen} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>×</CloseButton>
-        <h2>방명록</h2>
+        <Heading1>방명록</Heading1>
+        {posts.map((post) => (
+          <div key={post.id}>
+            <div onClick={() => remove.mutate({ postId: post.id!, inputPassword: post.password })}>
+              {post.id}
+            </div>
+            <div>{post.content}</div>
+          </div>
+        ))}
       </ModalContent>
     </ModalWrapper>
   );

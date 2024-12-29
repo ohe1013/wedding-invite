@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavermapsProvider } from 'react-naver-maps';
+import { ToastContainer } from 'react-toastify';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import Account from '@/layout/Account/Account.tsx';
@@ -12,7 +13,7 @@ import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
 function App() {
-  const ncpClientId = 'qgcus8kuuc';
+  const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID;
   const queryClient = new QueryClient();
   const [isVisible, setIsVisible] = useState(false);
   const galleryRef = useRef(null);
@@ -69,6 +70,7 @@ function App() {
             <div style={{ height: '15vh' }}></div>
           </Wrapper>
         </Container>
+        <ToastContainer />
       </QueryClientProvider>
     </NavermapsProvider>
   );

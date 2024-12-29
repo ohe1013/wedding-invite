@@ -1,4 +1,5 @@
 export interface GuestBookPostForm {
+  id?: string;
   name: string;
   password: string;
   content: string;

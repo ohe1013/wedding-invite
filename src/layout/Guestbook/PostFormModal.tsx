@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { realtimeDb } from 'firebase';
-import { push, ref, set } from 'firebase/database';
 import { GuestBookPostForm } from './type';
 import useForm from './useForm';
 import { useAddPost } from './useGuestBook';
-import { toast } from 'react-toastify';
+import Button from '@/components/Button';
+import { Heading1 } from '@/components/Text';
 const ModalWrapper = styled.div`
   display: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? 'flex' : 'none')};
   position: fixed;
@@ -48,19 +47,24 @@ const TextArea = styled.textarea`
   font-size: 1rem;
 `;
 
-const Button = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
+// const Button = styled.button`
+//   background-color: #007bff;
+//   color: #fff;
+//   border: none;
+//   padding: 0.75rem;
+//   border-radius: 0.25rem;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: #0056b3;
-  }
+//   &:hover {
+//     background-color: #0056b3;
+//   }
+// `;
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 5%;
+  gap: 8px;
 `;
-
 interface PostFormModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -69,7 +73,7 @@ interface PostFormModalProps {
 
 const PostFormModal: React.FC<PostFormModalProps> = ({ isOpen, onClose, onFormValid }) => {
   const addPostMutation = useAddPost();
-  const { handleChange, handleSubmit } = useForm<GuestBookPostForm>({
+  const { handleChange, handleSubmit, values } = useForm<GuestBookPostForm>({
     initialValues: {
       password: '',
       name: '', // 모든 필드를 초기화
@@ -82,14 +86,36 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ isOpen, onClose, onFormVa
   return (
     <ModalWrapper isOpen={isOpen} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <h2>방명록 글 작성</h2>
+        <Heading1>방명록 글 작성</Heading1>
         <Form onSubmit={handleSubmit}>
-          <Input onChange={handleChange} type="text" name="name" placeholder="이름" />
-          <Input onChange={handleChange} type="password" name="password" placeholder="비밀번호" />
-          <TextArea onChange={handleChange} placeholder="내용" name="content" rows={4} />
-          <Button type="submit">작성하기</Button>
+          <Input
+            onChange={handleChange}
+            value={values.name}
+            type="text"
+            name="name"
+            placeholder="이름"
+          />
+          <Input
+            onChange={handleChange}
+            value={values.password}
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+          />
+          <TextArea
+            onChange={handleChange}
+            value={values.content}
+            placeholder="내용"
+            name="content"
+            rows={4}
+          />
+          <ButtonWrapper>
+            <Button as="button" type="submit">
+              작성하기
+            </Button>
+            <Button onClick={onClose}>닫기</Button>
+          </ButtonWrapper>
         </Form>
-        <Button onClick={onClose}>닫기</Button>
       </ModalContent>
     </ModalWrapper>
   );

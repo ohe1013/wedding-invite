@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import mainImg from '@/assets/images/main.jpg';
 
@@ -15,14 +14,14 @@ const Container = styled.div`
   height: 600px;
 `;
 
-const SaveDateLink = styled.a`
-  display: block;
-  text-align: center;
-  text-decoration: underline;
-  color: white;
-  text-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
-  margin-bottom: 0.5rem;
-`;
+// const SaveDateLink = styled.a`
+//   display: block;
+//   text-align: center;
+//   text-decoration: underline;
+//   color: white;
+//   text-shadow: 0 3px 3px rgba(0, 0, 0, 0.8);
+//   margin-bottom: 0.5rem;
+// `;
 
 const CoupleName = styled.span`
   display: inline-block;
@@ -33,14 +32,14 @@ const CoupleName = styled.span`
   color: #1f2937; /* gray-900 */
 `;
 
-const BorderBox = styled.div`
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  top: 1rem;
-  bottom: 0;
-  border: 1px solid #e5e7eb; /* gray-200 */
-`;
+// const BorderBox = styled.div`
+//   position: absolute;
+//   left: 1rem;
+//   right: 1rem;
+//   top: 1rem;
+//   bottom: 0;
+//   border: 1px solid #e5e7eb; /* gray-200 */
+// `;
 
 const ImageWrapper = styled.div`
   width: 100%;
@@ -57,16 +56,16 @@ const Image = styled.img`
   left: 0;
 `;
 
-const DateInfo = styled.h1`
-  text-align: center;
-  font-size: 1.25rem; /* text-xl */
-  margin: 1rem 0;
-`;
+// const DateInfo = styled.h1`
+//   text-align: center;
+//   font-size: 1.25rem; /* text-xl */
+//   margin: 1rem 0;
+// `;
 
-const VenueInfo = styled.h2`
-  text-align: center;
-  font-size: 1.25rem; /* text-xl */
-`;
+// const VenueInfo = styled.h2`
+//   text-align: center;
+//   font-size: 1.25rem; /* text-xl */
+// `;
 
 const ContentWrapper = styled.div`
   margin: 3rem 1rem 3.5rem;
@@ -87,10 +86,6 @@ const HeaderContainer = styled.div`
 `;
 
 function Home() {
-  const [primary, setPrimary] = useState<boolean>(
-    Math.floor(Math.random() * 2) === 1 ? true : false,
-  );
-
   return (
     <Section>
       <Container>
