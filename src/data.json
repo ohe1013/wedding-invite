@@ -1,7 +1,7 @@
 {
   "greeting": {
     "title": "오현근 ❤ 고은비\n결혼합니다!",
-    "message": "저희 결혼합니다.\n서로가 가장 현명한 선택이 될 수 있도록\n이해하고, 사랑하며 살겠습니다.\n 평생 한길을 걷기로 약속한 날\n감사한 분들의 축복에 맞이할 수 있다면\n더 없는 기쁨으로 간직하겠습니다.\n 따뜻한 마음으로 축복해 주세요.",
+    "message": "저희 결혼합니다.\n서로가 가장 현명한 선택이 될 수 있도록\n이해하고, 사랑하며 살겠습니다.\n 평생 한길을 걷기로 약속한 날\n감사한 분들의 축복에 맞이할 수 있다면\n더없는 기쁨으로 간직하겠습니다.\n 따뜻한 마음으로 축복해 주세요.",
     "host": {
       "groom": {
         "name": "\u00A0현근",
@@ -32,7 +32,8 @@
         ]
       }
     },
-    "eventDetail": "2025년 5월 10일 (토) 17:50\n보타닉파크 웨딩홀 오키드홀"
+    "eventDetail": "2025년 5월 10일 (토) 17:50\n보타닉파크 웨딩홀 오키드홀",
+    "googleCalendarUrl": "https://calendar.google.com/calendar/u/0/r/eventedit?dates=20250510T085000Z/20250510T105000Z&location=%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%EC%9B%A8%EB%94%A9%ED%99%80&text=%ED%98%84%EA%B7%BC+%26+%EC%9D%80%EB%B9%84+%EA%B2%B0%ED%98%BC%EC%8B%9D"
   },
   "hostInfo": [
     {
@@ -89,7 +90,7 @@
   "mapInfo": {
     "address1": "보타닉파크 웨딩홀 오키드홀",
     "address2": "서울 강서구 마곡중앙5로 6\n 보타닉푸르지오시티 L층(로비층)\n0507-1412-8301",
-    "naverMap": "https://map.naver.com/p/directions/-/14118381.3792403,4518441.940748,%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%EC%9B%A8%EB%94%A9,94306527,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+    "naverMap": "https://map.naver.com/p/directions/-/14118381.3792403,4518441.940748,%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%EC%9B%A8%EB%94%A9,94306527,PLACE_POI/-/car?c=15.00,0,0,0,dh",
     "kakaoMap": "https://map.kakao.com/?map_type=TYPE_MAP&target=car&rt=,,489503,1123003&rt1=&rt2=%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%20%EC%9B%A8%EB%94%A9%ED%99%80&rtIds=,630786038",
     "tMapMap": "https://tmap.life/9b3d81a2",
     "googleMap": "https://www.google.co.kr/maps/dir//%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C+%EA%B0%95%EC%84%9C%EA%B5%AC+%EB%A7%88%EA%B3%A1%EC%A4%91%EC%95%995%EB%A1%9C+6+%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%EC%9B%A8%EB%94%A9/data=!4m9!4m8!1m0!1m5!1m1!1s0x357c9c7d108142ab:0xc2045652d7d14ce4!2m2!1d126.8269593!2d37.5672668!3e0?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
@@ -98,12 +99,12 @@
   },
   "locationInfo": [
     {
-      "title": "\uD83D\uDCCD 지하철",
+      "title": "🚇 지하철",
       "desc": "\uD83D\uDC49\uD83C\uDFFB 9호선·공항철도 마곡나루역 1,2번 출구방면 진입통로 연결\n\uD83D\uDC49\uD83C\uDFFB 마곡나루역 1번 2번 사이 내부연결통로로 연결되있어, 대중교통 시 편하게 방문 가능합니다."
     },
     {
-      "title": "\uD83D\uDCCD 주차안내",
-      "desc": "\uD83D\uDC49\uD83C\uDFFB 지하 3층~ 지하 5층 \n(안내데스크에서 주차권 수령)"
+      "title": "🅿️ 주차안내",
+      "desc": "\uD83D\uDC49\uD83C\uDFFB보타닉 푸르지오 시티 (지하 3층 ~ 지하 8층)\n2시간 무료주차 가능\n웨딩홀 광장 직원에게 차량번호 등록 필수"
     }
   ],
   "emojis": [

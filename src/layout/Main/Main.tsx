@@ -37,7 +37,7 @@ const MainImg = styled.img`
 
 const MainTitle = styled.p`
   font-family: TossFaceFontMac, serif;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: #2f2120;
   line-height: 120%;
   white-space: pre-line;
