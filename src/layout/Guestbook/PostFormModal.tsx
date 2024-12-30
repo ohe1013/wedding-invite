@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { GuestBookPostForm } from './type';
 import useForm from './useForm';
 import { useAddPost } from './useGuestBook';
+import nonPriavateImage from '@/assets/images/non-private-icon.png';
+import priavateImage from '@/assets/images/private-icon.png';
 import Button from '@/components/Button';
 import { Heading1 } from '@/components/Text';
 const ModalWrapper = styled.div`
@@ -32,7 +34,38 @@ const Form = styled.form`
   flex-direction: column;
   gap: 1rem;
 `;
+const InputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+const InputWithButton = styled.input`
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  padding-right: 2.5rem; /* 버튼 공간 확보 */
+`;
 
+const ToggleButton = styled.button`
+  position: absolute;
+  right: 0.5rem; /* Input 오른쪽에 여백 추가 */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
+const ToggleIcon = styled.img`
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.5;
+`;
 const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 0.25rem;
@@ -45,6 +78,7 @@ const TextArea = styled.textarea`
   border-radius: 0.25rem;
   padding: 0.5rem;
   font-size: 1rem;
+  height: 20vh;
 `;
 
 // const Button = styled.button`
@@ -73,7 +107,8 @@ interface PostFormModalProps {
 
 const PostFormModal: React.FC<PostFormModalProps> = ({ isOpen, onClose, onFormValid }) => {
   const addPostMutation = useAddPost();
-  const { handleChange, handleSubmit, values } = useForm<GuestBookPostForm>({
+  const [showPassword, setShowPassword] = useState(false);
+  const { handleChange, handleSubmit, values, errors } = useForm<GuestBookPostForm>({
     initialValues: {
       password: '',
       name: '', // 모든 필드를 초기화
@@ -95,13 +130,20 @@ const PostFormModal: React.FC<PostFormModalProps> = ({ isOpen, onClose, onFormVa
             name="name"
             placeholder="이름"
           />
-          <Input
-            onChange={handleChange}
-            value={values.password}
-            type="password"
-            name="password"
-            placeholder="비밀번호"
-          />
+          {errors.name && <p>{errors.name}</p>}
+          <InputWrapper>
+            <InputWithButton
+              onChange={handleChange}
+              value={values.password}
+              type={showPassword ? 'password' : 'text'}
+              name="password"
+              placeholder="비밀번호"
+            />
+            <ToggleButton onClick={() => setShowPassword(!showPassword)} type="button">
+              <ToggleIcon src={showPassword ? priavateImage : nonPriavateImage}></ToggleIcon>
+            </ToggleButton>
+          </InputWrapper>
+          {errors.password && <p>{errors.password}</p>}
           <TextArea
             onChange={handleChange}
             value={values.content}

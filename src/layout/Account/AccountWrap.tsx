@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Copy from '@/assets/icons/copy.svg?react';
 import kakaopay from '@/assets/icons/kakaopay.png?url';
 import toss from '@/assets/icons/toss.png?url';
+import { toast } from 'react-toastify';
 
 interface IAccountProps {
   name: string;
@@ -22,10 +23,10 @@ const AccountWrap = ({
   const handleCopy = () => {
     navigator.clipboard.writeText(account).then(
       () => {
-        alert('계좌번호가 복사되었습니다.😉😉');
+        toast.success('계좌번호가 복사되었습니다.😉😉');
       },
       () => {
-        alert('계좌번호 복사에 실패했습니다.🥲🥲');
+        toast.error('계좌번호 복사에 실패했습니다.🥲🥲');
       },
     );
   };

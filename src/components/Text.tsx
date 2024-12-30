@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Heading1 = styled.p`
   font-family: TossFaceFontMac, serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin: 10px;
   color: #e88ca6;
   white-space: pre-line;
@@ -24,7 +24,7 @@ export const PointTitle = styled.p`
 `;
 
 export const Paragraph = styled.p`
-  line-height: 2.2rem;
+  line-height: 2rem;
   white-space: pre-line;
 `;
 

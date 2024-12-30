@@ -20,6 +20,7 @@ const Content = styled.p`
   margin: 0.5rem 0;
   font-size: 0.875rem;
   color: #333;
+  word-break: break-word;
 `;
 
 const Author = styled.span`

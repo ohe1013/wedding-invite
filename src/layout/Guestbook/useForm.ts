@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { GuestBookPostForm } from './type';
 interface useFormProps<T> {
   initialValues: T;
   onSubmit: (values: T) => void;
@@ -6,7 +7,7 @@ interface useFormProps<T> {
 }
 function useForm<T>({ initialValues, onSubmit, validate }: useFormProps<T>) {
   const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Partial<GuestBookPostForm>>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (
