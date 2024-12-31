@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavermapsProvider } from 'react-naver-maps';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Zoom } from 'react-toastify';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import Account from '@/layout/Account/Account.tsx';
@@ -70,7 +70,7 @@ function App() {
             <div style={{ height: '15vh' }}></div>
           </Wrapper>
         </Container>
-        <ToastContainer />
+        <ToastContainer transition={Zoom} style={{ top: '1rem' }} />
       </QueryClientProvider>
     </NavermapsProvider>
   );

@@ -25,7 +25,7 @@ function useForm<T>({ initialValues, onSubmit, validate }: useFormProps<T>) {
 
   const clear = () => {
     setValues(initialValues);
-    console.log(initialValues);
+    setErrors({});
   };
 
   useEffect(() => {
@@ -46,6 +46,28 @@ function useForm<T>({ initialValues, onSubmit, validate }: useFormProps<T>) {
     handleSubmit,
     clear,
   };
+}
+
+export function postValidation({ name, password }: GuestBookPostForm) {
+  const errors: Partial<GuestBookPostForm> = {};
+  if (!name) {
+    errors.name = '이름이 입력되지 않았습니다.';
+  }
+  const regex = /^[a-zA-Z0-9]+$/;
+
+  function validateInput(input: string) {
+    if (regex.test(input)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  if (!password) {
+    errors.password = '비밀번호가 입력되지 않았습니다.';
+  } else if (!validateInput(password)) {
+    errors.password = '영문자와 숫자만 입력 가능합니다.';
+  }
+  return errors;
 }
 
 export default useForm;

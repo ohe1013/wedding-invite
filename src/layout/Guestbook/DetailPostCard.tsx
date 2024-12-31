@@ -16,6 +16,24 @@ const Card = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 `;
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: #007bff;
+
+  span:hover {
+    text-decoration: underline;
+  }
+`;
+
 const Content = styled.pre`
   margin: 0.5rem 0;
   font-size: 0.875rem;
@@ -29,18 +47,33 @@ const Author = styled.span`
   text-align: end;
 `;
 
-interface SimplePostCardProps {
+const Timestamp = styled.span`
+  font-size: 0.75rem;
+  color: #888;
+  text-align: end;
+`;
+
+interface DetailPostCardProps {
   post: GuestBookPost;
+  onEdit?: () => void;
+  onDelete?: () => void;
   props?: React.ComponentPropsWithoutRef<'div'>;
 }
 
-const SimplePostCard: React.FC<SimplePostCardProps> = ({ post, props }) => {
+const DetailPostCard: React.FC<DetailPostCardProps> = ({ post, onEdit, onDelete, props }) => {
   return (
     <Card {...props}>
+      <Header>
+        <Actions>
+          <span onClick={onEdit}>수정</span>
+          <span onClick={onDelete}>삭제</span>
+        </Actions>
+      </Header>
       <Content>{post.content}</Content>
       <Author>- {post.name}</Author>
+      <Timestamp>{'10'}</Timestamp>
     </Card>
   );
 };
 
-export default SimplePostCard;
+export default DetailPostCard;

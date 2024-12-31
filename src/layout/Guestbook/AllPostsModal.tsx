@@ -3,9 +3,77 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { realtimeDb } from 'firebase';
 import { onValue, ref } from 'firebase/database';
+import DetailPostCard from './DetailPostCard';
 import { GuestBookPostForm } from './type';
 import { useRemovePost } from './useGuestBook';
 import { Heading1 } from '@/components/Text';
+import PostFormModal from './PostFormModal';
+import { postValidation } from './useForm';
+
+interface AllPostsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const AllPostsModal: React.FC<AllPostsModalProps> = ({ isOpen, onClose }) => {
+  const [posts, setPosts] = useState<GuestBookPostForm[]>([]);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
+  const [selectPost, setSelectPost] = useState<GuestBookPostForm | null>(null);
+  useEffect(() => {
+    const guestBookRef = ref(realtimeDb, 'guestbook');
+
+    onValue(guestBookRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setPosts(
+          Object.entries(snapshot.val() as GuestBookPostForm[]).map((item) => ({
+            id: item[0],
+            ...item[1],
+          })),
+        );
+      } else {
+        setPosts([]);
+      }
+    });
+  }, []);
+  const handleFormModalClose = () => setIsFormModalOpen(false);
+  const onEditHandler = (post: GuestBookPostForm) => {
+    setIsFormModalOpen(!isFormModalOpen);
+    setSelectPost(post);
+  };
+
+  // const remove = useRemovePost();
+
+  return (
+    <ModalWrapper isOpen={isOpen} onClick={onClose}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        <CloseButton onClick={onClose}>×</CloseButton>
+        <Heading1>방명록</Heading1>
+        <ContentWrapper>
+          {posts.map((post) => (
+            <div key={post.id}>
+              <DetailPostCard
+                post={post}
+                onEdit={() => onEditHandler(post)}
+                // onDelete={remove.mutate}
+              ></DetailPostCard>
+            </div>
+          ))}
+        </ContentWrapper>
+      </ModalContent>
+      {isFormModalOpen && selectPost && (
+        <PostFormModal
+          isOpen={isFormModalOpen}
+          onClose={handleFormModalClose}
+          onFormValid={postValidation}
+          initialValues={selectPost}
+          type="update"
+        />
+      )}
+    </ModalWrapper>
+  );
+};
+
+export default AllPostsModal;
 
 const ModalWrapper = styled.div`
   display: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? 'flex' : 'none')};
@@ -39,48 +107,8 @@ const CloseButton = styled.button`
   font-size: 1.5rem;
 `;
 
-interface AllPostsModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const AllPostsModal: React.FC<AllPostsModalProps> = ({ isOpen, onClose }) => {
-  const [posts, setPosts] = useState<GuestBookPostForm[]>([]);
-  useEffect(() => {
-    const guestBookRef = ref(realtimeDb, 'guestbook');
-
-    onValue(guestBookRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setPosts(
-          Object.entries(snapshot.val() as GuestBookPostForm[]).map((item) => ({
-            id: item[0],
-            ...item[1],
-          })),
-        );
-      } else {
-        setPosts([]);
-      }
-    });
-  }, []);
-
-  const remove = useRemovePost();
-
-  return (
-    <ModalWrapper isOpen={isOpen} onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={onClose}>×</CloseButton>
-        <Heading1>방명록</Heading1>
-        {posts.map((post) => (
-          <div key={post.id}>
-            <div onClick={() => remove.mutate({ postId: post.id!, inputPassword: post.password })}>
-              {post.id}
-            </div>
-            <div>{post.content}</div>
-          </div>
-        ))}
-      </ModalContent>
-    </ModalWrapper>
-  );
-};
-
-export default AllPostsModal;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;

@@ -2,11 +2,94 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { GuestBookPostForm } from './type';
 import useForm from './useForm';
-import { useAddPost } from './useGuestBook';
+import { useAddPost, useUpdatePost } from './useGuestBook';
 import nonPriavateImage from '@/assets/images/non-private-icon.png';
 import priavateImage from '@/assets/images/private-icon.png';
 import Button from '@/components/Button';
 import { Heading1 } from '@/components/Text';
+
+interface PostFormModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onFormValid: (data: GuestBookPostForm) => Partial<GuestBookPostForm>;
+  type: 'insert' | 'update';
+  initialValues: GuestBookPostForm;
+}
+
+const PostFormModal: React.FC<PostFormModalProps> = ({
+  isOpen,
+  onClose,
+  onFormValid,
+  type = 'insert',
+  initialValues = {
+    password: '',
+    name: '',
+    content: '',
+  },
+}) => {
+  const addPostMutation = useAddPost(); // 항상 호출
+  const updatePostMutation = useUpdatePost(); // 항상 호출
+  const mutation = type === 'insert' ? addPostMutation : updatePostMutation; // 조건에 따라 선택
+
+  const [showPassword, setShowPassword] = useState(false);
+  const { handleChange, handleSubmit, values, errors, clear } = useForm<GuestBookPostForm>({
+    initialValues,
+    onSubmit: mutation.mutate,
+    validate: onFormValid,
+  });
+
+  return (
+    <ModalWrapper isOpen={isOpen}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        <Heading1>방명록 글 작성</Heading1>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            onChange={handleChange}
+            value={values.name}
+            type="text"
+            name="name"
+            placeholder="이름"
+          />
+          {errors.name && <TextError>{errors.name}</TextError>}
+          <InputWrapper>
+            <InputWithButton
+              onChange={handleChange}
+              value={values.password}
+              type={showPassword ? 'password' : 'text'}
+              name="password"
+              placeholder="비밀번호"
+            />
+            <ToggleButton onClick={() => setShowPassword(!showPassword)} type="button">
+              <ToggleIcon src={showPassword ? priavateImage : nonPriavateImage}></ToggleIcon>
+            </ToggleButton>
+          </InputWrapper>
+          {errors.password && <TextError>{errors.password}</TextError>}
+          <TextArea
+            onChange={handleChange}
+            value={values.content}
+            placeholder="내용"
+            name="content"
+            rows={4}
+          />
+          <ButtonWrapper>
+            <Button as="button" type="submit">
+              작성하기
+            </Button>
+            <Button
+              onClick={() => {
+                clear();
+                onClose();
+              }}>
+              닫기
+            </Button>
+          </ButtonWrapper>
+        </Form>
+      </ModalContent>
+    </ModalWrapper>
+  );
+};
+
+export default PostFormModal;
 const ModalWrapper = styled.div`
   display: ${({ isOpen }: { isOpen: boolean }) => (isOpen ? 'flex' : 'none')};
   position: fixed;
@@ -81,6 +164,15 @@ const TextArea = styled.textarea`
   height: 20vh;
 `;
 
+const TextError = styled.p`
+  padding: 0;
+  margin-top: -0.7rem;
+  margin-bottom: -0.5rem;
+  color: #f37177;
+  font-size: small;
+  text-align: left;
+`;
+
 // const Button = styled.button`
 //   background-color: #007bff;
 //   color: #fff;
@@ -99,68 +191,3 @@ const ButtonWrapper = styled.div`
   margin-right: 5%;
   gap: 8px;
 `;
-interface PostFormModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onFormValid: (data: GuestBookPostForm) => Partial<GuestBookPostForm>;
-}
-
-const PostFormModal: React.FC<PostFormModalProps> = ({ isOpen, onClose, onFormValid }) => {
-  const addPostMutation = useAddPost();
-  const [showPassword, setShowPassword] = useState(false);
-  const { handleChange, handleSubmit, values, errors } = useForm<GuestBookPostForm>({
-    initialValues: {
-      password: '',
-      name: '', // 모든 필드를 초기화
-      content: '',
-    },
-    onSubmit: addPostMutation.mutate,
-    validate: onFormValid,
-  });
-
-  return (
-    <ModalWrapper isOpen={isOpen} onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
-        <Heading1>방명록 글 작성</Heading1>
-        <Form onSubmit={handleSubmit}>
-          <Input
-            onChange={handleChange}
-            value={values.name}
-            type="text"
-            name="name"
-            placeholder="이름"
-          />
-          {errors.name && <p>{errors.name}</p>}
-          <InputWrapper>
-            <InputWithButton
-              onChange={handleChange}
-              value={values.password}
-              type={showPassword ? 'password' : 'text'}
-              name="password"
-              placeholder="비밀번호"
-            />
-            <ToggleButton onClick={() => setShowPassword(!showPassword)} type="button">
-              <ToggleIcon src={showPassword ? priavateImage : nonPriavateImage}></ToggleIcon>
-            </ToggleButton>
-          </InputWrapper>
-          {errors.password && <p>{errors.password}</p>}
-          <TextArea
-            onChange={handleChange}
-            value={values.content}
-            placeholder="내용"
-            name="content"
-            rows={4}
-          />
-          <ButtonWrapper>
-            <Button as="button" type="submit">
-              작성하기
-            </Button>
-            <Button onClick={onClose}>닫기</Button>
-          </ButtonWrapper>
-        </Form>
-      </ModalContent>
-    </ModalWrapper>
-  );
-};
-
-export default PostFormModal;
