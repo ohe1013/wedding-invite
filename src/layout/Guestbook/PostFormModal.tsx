@@ -13,7 +13,7 @@ interface PostFormModalProps {
   onClose: () => void;
   onFormValid: (data: GuestBookPostForm) => Partial<GuestBookPostForm>;
   type: 'insert' | 'update';
-  initialValues: GuestBookPostForm;
+  initialValues?: GuestBookPostForm;
 }
 
 const PostFormModal: React.FC<PostFormModalProps> = ({

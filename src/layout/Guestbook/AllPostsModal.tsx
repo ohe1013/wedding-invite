@@ -4,11 +4,10 @@ import styled from '@emotion/styled';
 import { realtimeDb } from 'firebase';
 import { onValue, ref } from 'firebase/database';
 import DetailPostCard from './DetailPostCard';
-import { GuestBookPostForm } from './type';
-import { useRemovePost } from './useGuestBook';
-import { Heading1 } from '@/components/Text';
 import PostFormModal from './PostFormModal';
+import { GuestBookPostForm } from './type';
 import { postValidation } from './useForm';
+import { Heading1 } from '@/components/Text';
 
 interface AllPostsModalProps {
   isOpen: boolean;

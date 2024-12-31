@@ -6,9 +6,9 @@ import { limitToFirst, onValue, orderByChild, query, ref } from 'firebase/databa
 import AllPostsModal from './AllPostsModal';
 import PostFormModal from './PostFormModal';
 import SimplePostCard from './SimplePostCard';
-import { GuestBookPost, GuestBookPostForm } from './type';
-import Button from '@/components/Button';
+import { GuestBookPost } from './type';
 import { postValidation } from './useForm';
+import Button from '@/components/Button';
 
 function GuestBook() {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
@@ -74,6 +74,7 @@ function GuestBook() {
         isOpen={isFormModalOpen}
         onClose={handleFormModalClose}
         onFormValid={postValidation}
+        type="insert"
       />
       {isPostsModalOpen && (
         <AllPostsModal isOpen={isPostsModalOpen} onClose={handleAllPostsModalClose} />
