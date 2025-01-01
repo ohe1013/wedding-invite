@@ -21,6 +21,8 @@ const Content = styled.pre`
   font-size: 0.875rem;
   color: #333;
   word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const Author = styled.span`
@@ -32,13 +34,14 @@ const Author = styled.span`
 interface SimplePostCardProps {
   post: GuestBookPost;
   props?: React.ComponentPropsWithoutRef<'div'>;
+  type?: 'normal' | 'contentOnly';
 }
 
-const SimplePostCard: React.FC<SimplePostCardProps> = ({ post, props }) => {
+const SimplePostCard: React.FC<SimplePostCardProps> = ({ post, props, type = 'normal' }) => {
   return (
     <Card {...props}>
       <Content>{post.content}</Content>
-      <Author>- {post.name}</Author>
+      {type === 'normal' ? <Author>- {post.name}</Author> : null}
     </Card>
   );
 };

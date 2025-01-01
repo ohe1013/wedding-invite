@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { realtimeDb } from 'firebase';
-import { limitToFirst, onValue, orderByChild, query, ref } from 'firebase/database';
+import { limitToLast, onValue, orderByChild, query, ref } from 'firebase/database';
 
 import AllPostsModal from './AllPostsModal';
 import PostFormModal from './PostFormModal';
@@ -10,6 +10,7 @@ import { GuestBookPost } from './type';
 import { postValidation } from './useForm';
 import Button from '@/components/Button';
 
+const limit = 7;
 function GuestBook() {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const [isPostsModalOpen, setIsPostsModalOpen] = useState<boolean>(false);
@@ -27,10 +28,14 @@ function GuestBook() {
 
   useEffect(() => {
     const guestBookRef = ref(realtimeDb, 'guestbook');
-    const q = query(guestBookRef, orderByChild('timestamp'), limitToFirst(7));
+    const q = query(guestBookRef, orderByChild('timestamp'), limitToLast(limit));
     onValue(q, (snapshot) => {
       if (snapshot.exists()) {
-        setPosts(Object.entries(snapshot.val() as GuestBookPost[]).map((item) => item[1]));
+        setPosts(
+          Object.entries(snapshot.val() as GuestBookPost[])
+            .map((item) => item[1])
+            .reverse(),
+        );
       } else {
         setPosts([]);
       }
@@ -53,15 +58,46 @@ function GuestBook() {
       <Container>
         <div>
           {posts && posts.length === 0 ? (
-            <EmptyState>
-              <span>아직 아무 글도 없어요.</span>
-              <span>새 글을 남겨보세요!</span>
-            </EmptyState>
+            <PostsContainer>
+              <SimplePostCard
+                props={{
+                  style: {
+                    justifyContent: 'center',
+                    width: '12rem',
+                    minWidth: '12rem',
+                    fontWeight: 600,
+                  },
+                  onClick: handleFormModalOpen,
+                }}
+                type={'contentOnly'}
+                post={{
+                  content: '아직 아무 글도 없어요. \n새 글을 남겨보세요!\n',
+                  name: '',
+                  timestamp: 0,
+                }}
+              />
+            </PostsContainer>
           ) : (
             <PostsContainer>
               {posts.map((post, _idx) => (
                 <SimplePostCard key={post.name + _idx} post={post} />
               ))}
+              {posts.length === limit && (
+                <SimplePostCard
+                  props={{
+                    style: {
+                      justifyContent: 'center',
+                    },
+                    onClick: handleAllPostsModalOpen,
+                  }}
+                  type={'contentOnly'}
+                  post={{
+                    content: '방명록 \n더 보러가기☺️\n',
+                    name: '',
+                    timestamp: 0,
+                  }}
+                />
+              )}
             </PostsContainer>
           )}
           <ButtonWrapper>
@@ -91,10 +127,14 @@ const Section = styled.div`
   // overflow-x: auto;
 `;
 const PostsContainer = styled.div`
-  max-width: 90vw;
+  @media (max-width: 768px) {
+    width: 90vw;
+    max-width: 90vw;
+  }
+  width: 500px;
+  max-width: 500px;
   overflow-x: auto;
   display: flex;
-  width: 90vw;
   gap: 12px;
   height: 16rem;
   padding: 0.5rem 0;
@@ -124,17 +164,17 @@ const Container = styled.div`
   gap: 3rem;
 `;
 
-const EmptyState = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 16rem;
-  padding: 1rem 0;
-  position: relative;
-  text-align: center;
-`;
+// const EmptyState = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   height: 16rem;
+//   padding: 1rem 0;
+//   position: relative;
+//   text-align: center;
+// `;
 
 // const LoadMoreButton = styled.button`
 //   display: flex;

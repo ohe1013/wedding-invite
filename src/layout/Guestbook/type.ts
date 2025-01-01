@@ -3,6 +3,7 @@ export interface GuestBookPostForm {
   name: string;
   password: string;
   content: string;
+  timestamp: number;
 }
 
 export type GuestBookPost = Omit<GuestBookPostForm, 'password'>;

@@ -42,7 +42,7 @@
         {
           "name": "오현근",
           "relation": "신랑",
-          "bank": "국민은행",
+          "bank": "국민",
           "account": "350401-04-06-5976",
           "kakaopayAccount": "",
           "tossAccount": ""
@@ -50,13 +50,13 @@
         {
           "name": "오윤택",
           "relation": "아버지",
-          "bank": "하나은행",
+          "bank": "하나",
           "account": "272-810097-53307"
         },
         {
           "name": "김치덕",
           "relation": "어머니",
-          "bank": "국민은행",
+          "bank": "국민",
           "account": "347-21-0359-719"
         }
       ]
@@ -67,8 +67,8 @@
         {
           "name": "고은비",
           "relation": "신부",
-          "bank": "신한은행",
-          "account": "1234-5678-9012",
+          "bank": "신한",
+          "account": "110-32249-5744",
           "kakaopayAccount": "",
           "tossAccount": ""
         },
@@ -76,13 +76,13 @@
           "name": "고제학",
           "relation": "아버지",
           "bank": "농협",
-          "account": "123-45-678901"
+          "account": "195-01-111502"
         },
         {
           "name": "조루시아",
           "relation": "어머니",
           "bank": "농협",
-          "account": "123-45-678901"
+          "account": "588-02-006953"
         }
       ]
     }

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
+import { toast } from 'react-toastify';
 import Copy from '@/assets/icons/copy.svg?react';
 import kakaopay from '@/assets/icons/kakaopay.png?url';
 import toss from '@/assets/icons/toss.png?url';
-import { toast } from 'react-toastify';
 
 interface IAccountProps {
   name: string;

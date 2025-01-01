@@ -20,7 +20,11 @@ const addPost = async (newPost: GuestBookPostForm): Promise<void> => {
   const newPostRef = push(postRef);
   // 데이터 업데이트
   const hashedPassword = await bcrypt.hash(newPost.password, 10);
-  console.log(newPost);
+  console.log({
+    ...newPost,
+    password: hashedPassword,
+    timestamp: Date.now(),
+  });
   await set(newPostRef, {
     ...newPost,
     password: hashedPassword,
@@ -68,7 +72,6 @@ async function deletePost(postId: string, inputPassword: string) {
   if (snapshot.exists()) {
     const postData = snapshot.val() as GuestBookPostForm;
     const hashedPassword = postData.password;
-    console.log(hashedPassword);
 
     // 비밀번호 검증
     const isMatch = await bcrypt.compare(inputPassword, hashedPassword);
@@ -110,8 +113,8 @@ const useAddPost = () => {
 };
 
 const useRemovePost = () => {
-  return useMutation<void, Error, { postId: string; inputPassword: string }>({
-    mutationFn: ({ postId, inputPassword }) => deletePost(postId, inputPassword),
+  return useMutation<void, Error, GuestBookPostForm>({
+    mutationFn: (post) => deletePost(post.id!, post.password),
     onSuccess: () => {
       toast.info('방명록이 삭제되었습니다!');
     },
@@ -128,7 +131,7 @@ const useUpdatePost = () => {
   return useMutation<void, Error, GuestBookPostForm>({
     mutationFn: updatePost,
     onSuccess: () => {
-      toast.info('방명록이 삭제되었습니다!');
+      toast.info('방명록이 수정되었습니다!');
     },
     onError: (e) => {
       if (e.message === 'e1') {

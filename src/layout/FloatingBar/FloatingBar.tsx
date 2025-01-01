@@ -4,11 +4,11 @@ import data from 'data.json';
 import { increment, onValue, ref, update } from 'firebase/database';
 import { realtimeDb } from 'firebase.ts';
 import JSConfetti from 'js-confetti';
+import { toast } from 'react-toastify';
 import Heart from '@/assets/icons/heart_plus.svg?react';
 import Share from '@/assets/icons/share.svg?react';
 import Upward from '@/assets/icons/upward.svg?react';
 import Button from '@/components/Button.tsx';
-import { toast } from 'react-toastify';
 
 const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
   const { emojis } = data;
