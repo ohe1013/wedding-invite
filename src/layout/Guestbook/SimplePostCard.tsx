@@ -20,9 +20,20 @@ const Content = styled.pre`
   margin: 0.5rem 0;
   font-size: 0.875rem;
   color: #333;
-  word-break: break-word;
+  /* word-break: break-word; */
+  white-space: pre-wrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  max-height: 100%;
+  display: -webkit-box; /* Flex 박스 설정 */
+  -webkit-box-orient: vertical; /* 세로 방향 정렬 */
+  -webkit-line-clamp: 8; /* 최대 줄 수 */
+  overflow: hidden; /* 넘치는 부분 숨김 */
+
+  /* Firefox 지원 */
+  display: box; /* 구형 브라우저 지원 */
+  box-orient: vertical; /* 세로 방향 정렬 */
+  line-clamp: 8; /* 최대 줄 수 */
 `;
 
 const Author = styled.span`

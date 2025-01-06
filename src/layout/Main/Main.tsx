@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import data from 'data.json';
-import mainImg from '@/assets/images/main.jpg';
+import mainImg from '@/assets/images/13.webp';
 // import Home from './Home';
 
 const Main = () => {
