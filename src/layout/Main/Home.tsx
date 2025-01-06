@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import mainImg from '@/assets/images/13.webp';
+import mainImg from '@/assets/images/13.jpg';
 
 const Section = styled.section`
   width: 100%;
