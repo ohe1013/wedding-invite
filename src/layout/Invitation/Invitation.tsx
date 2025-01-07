@@ -13,7 +13,7 @@ const Invitation = () => {
       <Host />
       {/* <Caption textAlign={'center'}>{greeting.eventDetail}</Caption> */}
       <Button
-        style={{ marginTop: '12px', marginBottom: '12px' }}
+        style={{ marginTop: '3rem', marginBottom: '1rem' }}
         target="_blank"
         href={greeting.googleCalendarUrl}
         rel="noreferrer">

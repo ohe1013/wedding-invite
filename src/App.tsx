@@ -42,7 +42,7 @@ function App() {
     <NavermapsProvider ncpClientId={ncpClientId}>
       <QueryClientProvider client={queryClient}>
         <Container>
-          <Wrapper>
+          <Wrapper style={{ paddingTop: '0px' }}>
             <Main />
           </Wrapper>
           <Wrapper>
