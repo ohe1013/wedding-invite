@@ -16,7 +16,7 @@ export const BackgroundMusic = ({ isMusic }: { isMusic: boolean }) => {
   }, [isMusic]);
 
   return (
-    <audio ref={audioRef} autoPlay>
+    <audio ref={audioRef}>
       <source src={`/ourStory.mp3`} />
       브라우저가 오디오 태그를 지원하지 않습니다.
     </audio>
