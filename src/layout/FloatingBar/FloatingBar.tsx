@@ -6,11 +6,21 @@ import { realtimeDb } from 'firebase.ts';
 import JSConfetti from 'js-confetti';
 import { toast } from 'react-toastify';
 import Heart from '@/assets/icons/heart_plus.svg?react';
+import Music from '@/assets/icons/music.svg?react';
+import MusicOff from '@/assets/icons/musicOff.svg?react';
 import Share from '@/assets/icons/share.svg?react';
 import Upward from '@/assets/icons/upward.svg?react';
 import Button from '@/components/Button.tsx';
 
-const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
+const FloatingBar = ({
+  isVisible,
+  isMusic,
+  onMusicHandler,
+}: {
+  isVisible: boolean;
+  isMusic: boolean;
+  onMusicHandler: () => void;
+}) => {
   const { emojis } = data;
 
   const [count, setCount] = useState(0);
@@ -53,6 +63,10 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
       <Button onClick={handleCount}>
         <Heart fill="#e88ca6" />
         {count || ''}
+      </Button>
+      <Button onClick={onMusicHandler}>
+        {isMusic ? <Music fill="#e88ca6" /> : <MusicOff fill="#e88ca6" />}
+        음악
       </Button>
       <Button onClick={handleCopy}>
         <Share fill="#e88ca6" />

@@ -5,6 +5,7 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import Account from '@/layout/Account/Account.tsx';
+import { BackgroundMusic } from '@/layout/BackgroundMusic/BackgroundMusic';
 import Container from '@/layout/Container.tsx';
 import FloatingBar from '@/layout/FloatingBar/FloatingBar.tsx';
 import GalleryWrap from '@/layout/Gallery/GalleryWrap.tsx';
@@ -15,28 +16,29 @@ import Main from '@/layout/Main/Main.tsx';
 function App() {
   const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID;
   const queryClient = new QueryClient();
-  const [isVisible, setIsVisible] = useState(false);
-  const galleryRef = useRef(null);
+  const [isVisible] = useState(true);
+  const [music, setMusic] = useState(false);
+  // const galleryRef = useRef(null);
 
-  useEffect(() => {
-    window.addEventListener('scroll', checkScrollPosition);
-    return () => {
-      window.removeEventListener('scroll', checkScrollPosition);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', checkScrollPosition);
+  //   return () => {
+  //     window.removeEventListener('scroll', checkScrollPosition);
+  //   };
+  // }, []);
 
-  const checkScrollPosition = () => {
-    if (galleryRef.current) {
-      const { offsetTop } = galleryRef.current;
-      const scrollPosition = window.scrollY;
+  // const checkScrollPosition = () => {
+  //   if (galleryRef.current) {
+  //     const { offsetTop } = galleryRef.current;
+  //     const scrollPosition = window.scrollY;
 
-      if (scrollPosition >= offsetTop) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    }
-  };
+  //     if (scrollPosition >= offsetTop) {
+  //       setIsVisible(true);
+  //     } else {
+  //       setIsVisible(false);
+  //     }
+  //   }
+  // };
 
   return (
     <NavermapsProvider ncpClientId={ncpClientId}>
@@ -49,7 +51,7 @@ function App() {
             <Heading1>모시는 글</Heading1>
             <Invitation />
           </Wrapper>
-          <Wrapper ref={galleryRef}>
+          <Wrapper>
             <Heading1>Gallery</Heading1>
             <GalleryWrap />
           </Wrapper>
@@ -65,11 +67,16 @@ function App() {
             <Heading1>방명록</Heading1>
             <Guestbook />
           </Wrapper>
-          <FloatingBar isVisible={isVisible} />
+          <FloatingBar
+            isVisible={isVisible}
+            isMusic={music}
+            onMusicHandler={() => setMusic((prev) => !prev)}
+          />
           <Wrapper>
             <div style={{ height: '15vh' }}></div>
           </Wrapper>
         </Container>
+        <BackgroundMusic isMusic={music} />
         <ToastContainer transition={Zoom} style={{ top: '1rem' }} />
       </QueryClientProvider>
     </NavermapsProvider>
