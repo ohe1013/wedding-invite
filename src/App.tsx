@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavermapsProvider } from 'react-naver-maps';
 import { ToastContainer, Zoom } from 'react-toastify';
