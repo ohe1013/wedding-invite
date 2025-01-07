@@ -3,7 +3,7 @@ import data from 'data.json';
 import Host from '../Contact/Host.tsx';
 // import RoundButton from '@/components/RoundButton.tsx';
 import Button from '@/components/Button.tsx';
-import { Caption, Paragraph } from '@/components/Text.tsx';
+import { Paragraph } from '@/components/Text.tsx';
 
 const Invitation = () => {
   const { greeting } = data;
@@ -11,8 +11,12 @@ const Invitation = () => {
     <InvitationWrapper>
       <Paragraph>{greeting.message}</Paragraph>
       <Host />
-      <Caption textAlign={'center'}>{greeting.eventDetail}</Caption>
-      <Button target="_blank" href={greeting.googleCalendarUrl} rel="noreferrer">
+      {/* <Caption textAlign={'center'}>{greeting.eventDetail}</Caption> */}
+      <Button
+        style={{ marginTop: '12px', marginBottom: '12px' }}
+        target="_blank"
+        href={greeting.googleCalendarUrl}
+        rel="noreferrer">
         구글 캘린더 추가하기
       </Button>
     </InvitationWrapper>

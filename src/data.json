@@ -4,26 +4,26 @@
     "message": "저희 결혼합니다.\n서로가 가장 현명한 선택이 될 수 있도록\n이해하고, 사랑하며 살겠습니다.\n 평생 한길을 걷기로 약속한 날\n감사한 분들의 축복에 맞이할 수 있다면\n더없는 기쁨으로 간직하겠습니다.\n 따뜻한 마음으로 축복해 주세요.",
     "host": {
       "groom": {
-        "name": "\u00A0현근",
-        "relation": "아들",
+        "name": "현근",
+        "relation": "차남",
         "parents": [
           {
             "relation": "아버지",
-            "name": "오윤택"
+            "name": "오윤택\u00A0\u00A0"
           },
           {
             "relation": "어머니",
-            "name": "김치덕"
+            "name": "김치덕\u00A0\u00A0"
           }
         ]
       },
       "bride": {
         "name": "은비",
-        "relation": "딸",
+        "relation": "장녀",
         "parents": [
           {
             "relation": "아버지",
-            "name": "고제학"
+            "name": "고제학\u00A0\u00A0"
           },
           {
             "relation": "어머니",
