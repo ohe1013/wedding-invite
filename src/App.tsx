@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavermapsProvider } from 'react-naver-maps';
 import { ToastContainer, Zoom } from 'react-toastify';
@@ -16,29 +16,29 @@ import Main from '@/layout/Main/Main.tsx';
 function App() {
   const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID;
   const queryClient = new QueryClient();
-  const [isVisible] = useState(true);
-  const [music, setMusic] = useState(false);
-  // const galleryRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const locationRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   window.addEventListener('scroll', checkScrollPosition);
-  //   return () => {
-  //     window.removeEventListener('scroll', checkScrollPosition);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', checkScrollPosition);
+    return () => {
+      window.removeEventListener('scroll', checkScrollPosition);
+    };
+  }, []);
 
-  // const checkScrollPosition = () => {
-  //   if (galleryRef.current) {
-  //     const { offsetTop } = galleryRef.current;
-  //     const scrollPosition = window.scrollY;
+  const checkScrollPosition = () => {
+    if (locationRef.current) {
+      const { offsetTop } = locationRef.current;
+      const scrollPosition = window.scrollY;
 
-  //     if (scrollPosition >= offsetTop) {
-  //       setIsVisible(true);
-  //     } else {
-  //       setIsVisible(false);
-  //     }
-  //   }
-  // };
+      if (scrollPosition >= offsetTop) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    }
+  };
 
   return (
     <NavermapsProvider ncpClientId={ncpClientId}>
@@ -59,7 +59,7 @@ function App() {
             <Heading1>마음 전하실 곳</Heading1>
             <Account />
           </Wrapper>
-          <Wrapper>
+          <Wrapper ref={locationRef}>
             <Heading1>오시는 길</Heading1>
             <Location />
           </Wrapper>
@@ -69,14 +69,17 @@ function App() {
           </Wrapper>
           <FloatingBar
             isVisible={isVisible}
-            isMusic={music}
-            onMusicHandler={() => setMusic((prev) => !prev)}
+            isPlayingMusic={isPlayingMusic}
+            onMusicHandler={() => setIsPlayingMusic((prev) => !prev)}
           />
           <Wrapper>
             <div style={{ height: '15vh' }}></div>
           </Wrapper>
         </Container>
-        <BackgroundMusic isMusic={music} />
+        <BackgroundMusic
+          isPlayingMusic={isPlayingMusic}
+          onMusicHandler={(isPlayingMusic: boolean) => setIsPlayingMusic(isPlayingMusic)}
+        />
         <ToastContainer transition={Zoom} style={{ top: '1rem' }} />
       </QueryClientProvider>
     </NavermapsProvider>
