@@ -60,6 +60,7 @@ const Content = styled.pre`
   color: #333;
   word-break: break-word;
   min-height: 6rem;
+  white-space: pre-wrap;
 `;
 
 const Author = styled.span`
