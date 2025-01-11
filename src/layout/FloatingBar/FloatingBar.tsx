@@ -14,11 +14,11 @@ import Button from '@/components/Button.tsx';
 
 const FloatingBar = ({
   isVisible,
-  isMusic,
+  isPlayingMusic,
   onMusicHandler,
 }: {
   isVisible: boolean;
-  isMusic: boolean;
+  isPlayingMusic: boolean;
   onMusicHandler: () => void;
 }) => {
   const { emojis } = data;
@@ -59,23 +59,25 @@ const FloatingBar = ({
   };
 
   return (
-    <Nav isVisible={isVisible}>
+    <Nav isVisible={true}>
       <Button onClick={handleCount}>
         <Heart fill="#e88ca6" />
         {count || ''}
       </Button>
       <Button onClick={onMusicHandler}>
-        {isMusic ? <Music fill="#e88ca6" /> : <MusicOff fill="#e88ca6" />}
+        {isPlayingMusic ? <Music fill="#e88ca6" /> : <MusicOff fill="#e88ca6" />}
         음악
       </Button>
       <Button onClick={handleCopy}>
         <Share fill="#e88ca6" />
         공유
       </Button>
-      <Button onClick={handleScroll}>
-        <Upward fill="#e88ca6" />
-        위로
-      </Button>
+      {isVisible ? (
+        <Button onClick={handleScroll}>
+          <Upward fill="#e88ca6" />
+          위로
+        </Button>
+      ) : null}
     </Nav>
   );
 };
