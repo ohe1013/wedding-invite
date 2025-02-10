@@ -55,7 +55,7 @@ const Header = styled.div`
 `;
 
 const Content = styled.pre`
-  margin: 0.5rem 0;
+  margin: 0.875rem 0;
   font-size: 0.875rem;
   color: #333;
   word-break: break-word;
