@@ -13,9 +13,9 @@ import Guestbook from '@/layout/Guestbook/Guestbook.tsx';
 import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
-import Button from './components/Button';
+// import Button from './components/Button';
 function App() {
-  const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID;
+  const ncpClientId = import.meta.env.VITE_APP_NAVERMAPS_CLIENT_ID as string;
   const queryClient = new QueryClient();
   const [isVisible, setIsVisible] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
@@ -68,12 +68,12 @@ function App() {
             <Heading1>방명록</Heading1>
             <Guestbook />
           </Wrapper>
-          <Wrapper>
+          {/* <Wrapper>
             <Heading1>은비현근 결혼식</Heading1>
             <Button target="_blank" rel="noreferrer" href="https://hg-eb-wedding.vercel.app/">
               구경가기
             </Button>
-          </Wrapper>
+          </Wrapper> */}
           <FloatingBar
             isVisible={isVisible}
             isPlayingMusic={isPlayingMusic}
