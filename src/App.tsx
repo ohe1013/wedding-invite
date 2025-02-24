@@ -69,12 +69,12 @@ function App() {
             <Heading1>방명록</Heading1>
             <Guestbook />
           </Wrapper>
-          <Wrapper>
+          {/* <Wrapper>
             <Heading1>은비현근 결혼식</Heading1>
             <Button target="_blank" rel="noreferrer" href="https://hg-eb-wedding.vercel.app/">
               구경가기
             </Button>
-          </Wrapper>
+          </Wrapper> */}
           <FloatingBar
             isVisible={isVisible}
             isPlayingMusic={isPlayingMusic}
