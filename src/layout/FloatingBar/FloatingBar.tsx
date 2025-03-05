@@ -11,6 +11,7 @@ import MusicOff from '@/assets/icons/musicOff.svg?react';
 import Share from '@/assets/icons/share.svg?react';
 import Upward from '@/assets/icons/upward.svg?react';
 import Button from '@/components/Button.tsx';
+import Kakao from '@/types/kakao';
 
 const FloatingBar = ({
   isVisible,
@@ -21,7 +22,7 @@ const FloatingBar = ({
   isPlayingMusic: boolean;
   onMusicHandler: () => void;
 }) => {
-  const { emojis } = data;
+  const { emojis, mapInfo } = data;
 
   const [count, setCount] = useState(0);
 
@@ -30,9 +31,47 @@ const FloatingBar = ({
     onValue(dbRef, (snapshot) => {
       setCount(Number(snapshot.val()));
     });
+    if (!Kakao.isInitialized()) {
+      Kakao.init('8f6a3a6692992e864c974b216adbbbcc');
+    }
   }, []);
-
+  function sendLink() {
+    if (!Kakao.isInitialized()) {
+      Kakao.init('8f6a3a6692992e864c974b216adbbbcc');
+    }
+    Kakao.Link.sendDefault({
+      objectType: 'location',
+      address: '서울특별시 강남구 삼성동 123-45',
+      addressTitle: '웨딩홀 위치',
+      content: {
+        title: '현근 은비, 결혼합니다',
+        description: '2025년 5월 10일 (토) 오후 5시 50분',
+        imageUrl: 'https://wedding-invite-teal.vercel.app/assets/13-a28ba209.jpg',
+        link: {
+          mobileWebUrl: 'https://wedding-invite-teal.vercel.app',
+          webUrl: 'https://wedding-invite-teal.vercel.app',
+        },
+      },
+      buttons: [
+        {
+          title: '초대장 보기',
+          link: {
+            mobileWebUrl: 'https://wedding-invite-teal.vercel.app',
+            webUrl: 'https://wedding-invite-teal.vercel.app',
+          },
+        },
+        {
+          title: '위치 보기',
+          link: {
+            mobileWebUrl: mapInfo.naverMap,
+            webUrl: mapInfo.naverMap,
+          },
+        },
+      ],
+    });
+  }
   const handleCopy = () => {
+    sendLink();
     navigator.clipboard.writeText(window.location.href).then(
       () => {
         toast.success('주소가 복사되었습니다.😉😉');
