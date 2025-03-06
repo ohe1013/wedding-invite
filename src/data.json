@@ -90,6 +90,7 @@
   "mapInfo": {
     "address1": "보타닉파크 웨딩홀 오키드홀",
     "address2": "서울 강서구 마곡중앙5로 6\n 보타닉푸르지오시티 L층(로비층)\n0507-1412-8301",
+    "defaultMap": "https://naver.me/502MVbqj",
     "naverMap": "https://map.naver.com/p/directions/-/14118381.3792403,4518441.940748,%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%EC%9B%A8%EB%94%A9,94306527,PLACE_POI/-/car?c=15.00,0,0,0,dh",
     "kakaoMap": "https://map.kakao.com/?map_type=TYPE_MAP&target=car&rt=,,489503,1123003&rt1=&rt2=%EB%B3%B4%ED%83%80%EB%8B%89%ED%8C%8C%ED%81%AC%20%EC%9B%A8%EB%94%A9%ED%99%80&rtIds=,630786038",
     "tMapMap": "https://tmap.life/9b3d81a2",
