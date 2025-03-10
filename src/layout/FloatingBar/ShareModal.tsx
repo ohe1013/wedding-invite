@@ -19,7 +19,7 @@ export const ShareModal = (props: ShareModalProps) => {
       content: {
         title: '현근 은비, 결혼합니다',
         description: '2025년 5월 10일 (토) 오후 5시 50분\n보타닉파크 웨딩홀',
-        imageUrl: 'https://wedding-invite-teal.vercel.app/assets/04-0238a17c.jpg',
+        imageUrl: 'https://wedding-invite-teal.vercel.app/mainImg.jpg',
         link: {
           mobileWebUrl: 'https://wedding-invite-teal.vercel.app',
           webUrl: 'https://wedding-invite-teal.vercel.app',
