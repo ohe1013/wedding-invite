@@ -34,7 +34,7 @@ const FloatingBar = ({
       setCount(Number(snapshot.val()));
     });
     if (!Kakao.isInitialized()) {
-      Kakao.init('4b8ccea2726c080951a31613ad9a3823');
+      Kakao.init(import.meta.env.VITE_APP_KAKAO_KEY as string);
     }
   }, []);
 

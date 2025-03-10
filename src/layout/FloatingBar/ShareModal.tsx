@@ -12,12 +12,10 @@ export const ShareModal = (props: ShareModalProps) => {
   const { mapInfo } = data;
   function sendLink() {
     if (!Kakao.isInitialized()) {
-      Kakao.init('4b8ccea2726c080951a31613ad9a3823');
+      Kakao.init(import.meta.env.VITE_APP_KAKAO_KEY as string);
     }
     Kakao.Link.sendDefault({
-      objectType: 'location',
-      address: '보타닉파크 웨딩홀',
-      addressTitle: '웨딩홀 위치',
+      objectType: 'feed',
       content: {
         title: '현근 은비, 결혼합니다',
         description: '2025년 5월 10일 (토) 오후 5시 50분\n보타닉파크 웨딩홀',
@@ -38,8 +36,8 @@ export const ShareModal = (props: ShareModalProps) => {
         {
           title: '위치 보기',
           link: {
-            mobileWebUrl: mapInfo.defaultMap as string,
-            webUrl: mapInfo.defaultMap as string,
+            mobileWebUrl: mapInfo.defaultMap,
+            webUrl: mapInfo.defaultMap,
           },
         },
       ],
