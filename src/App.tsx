@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NavermapsProvider } from 'react-naver-maps';
 import { ToastContainer, Zoom } from 'react-toastify';
+import Button from '@/components/Button.tsx';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import Account from '@/layout/Account/Account.tsx';
@@ -68,12 +69,12 @@ function App() {
             <Heading1>방명록</Heading1>
             <Guestbook />
           </Wrapper>
-          {/* <Wrapper>
+          <Wrapper>
             <Heading1>은비현근 결혼식</Heading1>
             <Button target="_blank" rel="noreferrer" href="https://hg-eb-wedding.vercel.app/">
               구경가기
             </Button>
-          </Wrapper> */}
+          </Wrapper>
           <FloatingBar
             isVisible={isVisible}
             isPlayingMusic={isPlayingMusic}
