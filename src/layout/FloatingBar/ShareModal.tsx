@@ -120,4 +120,5 @@ const Button = styled.button`
 
 const Span = styled.span`
   text-align: center;
+  margin: auto;
 `;
