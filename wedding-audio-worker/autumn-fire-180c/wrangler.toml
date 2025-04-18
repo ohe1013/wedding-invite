@@ -1,0 +1,8 @@
+name = "wedding-audio-proxy"  # 👈 여기 원하는 이름으로 바꿔!
+main = "src/index.ts"
+compatibility_date = "2024-04-18"
+
+[[r2_buckets]]
+binding = "AUDIO_BUCKET"
+bucket_name = "wedding-audio"
+preview_bucket_name = "wedding-audio"

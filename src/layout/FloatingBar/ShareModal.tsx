@@ -48,6 +48,9 @@ export const ShareModal = (props: ShareModalProps) => {
   };
 
   const handleLinkButton = () => {
+    const an = document.createElement('a');
+    an.href = 'supertoss://send?bankCode=088&accountNo=12345678901234';
+    an.click();
     navigator.clipboard.writeText(window.location.href).then(
       () => {
         toast.success('주소가 복사되었습니다.😉😉');
