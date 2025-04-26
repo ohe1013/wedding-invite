@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import data from 'data.json';
 import { toast } from 'react-toastify';
 import Kakao from '@/types/kakao';
+import { MouseEventHandler } from 'react';
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -47,7 +48,8 @@ export const ShareModal = (props: ShareModalProps) => {
     sendLink();
   };
 
-  const handleLinkButton = () => {
+  const handleLinkButton: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
     navigator.clipboard.writeText(window.location.href).then(
       () => {
         toast.success('주소가 복사되었습니다.😉😉');
