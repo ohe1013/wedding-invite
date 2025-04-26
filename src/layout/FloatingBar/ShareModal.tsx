@@ -71,7 +71,7 @@ export const ShareModal = (props: ShareModalProps) => {
               height={50}
               style={{ margin: 'auto' }}
             />
-            카카오톡
+            <Span>카카오톡</Span>
           </Button>
           <Button onClick={handleLinkButton}>
             <img
@@ -81,7 +81,7 @@ export const ShareModal = (props: ShareModalProps) => {
               height={50}
               style={{ margin: 'auto' }}
             />
-            주소 복사
+            <Span>주소 복사</Span>
           </Button>
         </div>
       </ModalContent>
@@ -117,5 +117,10 @@ const Button = styled.button`
   flex-direction: column;
   background: none;
   border: none;
-  font-faimily: TossFaceFontMac;
+  font-family: TossFaceFontMac;
+`;
+
+const Span = styled.span`
+  text-align: center;
+  margin: auto;
 `;

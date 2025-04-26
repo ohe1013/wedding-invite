@@ -21,7 +21,7 @@ export const BackgroundMusic = ({
 
   return (
     <audio ref={audioRef} onEnded={() => onMusicHandler(false)} loop>
-      <source src={`/ourStory.mp3`} />
+      <source src={`https://wedding-audio-proxy.wedding-audio.workers.dev/ourStory.mp3`} />
       브라우저가 오디오 태그를 지원하지 않습니다.
     </audio>
   );
